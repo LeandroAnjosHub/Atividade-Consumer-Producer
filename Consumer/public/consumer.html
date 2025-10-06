@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RabbitMQ JS Consumer</title>
+    <link rel="stylesheet" href="consumer.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="content">
+            <h1>Sugestão de música</h1>
+            <div id="div_resultado">
+                
+            </div>
+            <button onclick="fetchMessage()">Verificar sugestão</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function fetchMessage() {
+        var resultado = document.getElementById("div_resultado");
+        fetch('/messages')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(dados => {
+                console.log(dados);
+                var musica = JSON.parse(dados);
+                resultado.innerHTML = `
+                <p>Nome da música:
+                    <span>${musica.nome}</span>
+                </p>
+                <p> Artista:
+                    <span>${musica.artista}</span>
+                </p>
+                <p>Data de lançamento:
+                    <span>${musica.data}</span>
+                </p>`
+                
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                resultado.innerHTML = "<h3>Sem sugestões no momento...</h3>"
+            });
+    }
+</script>
