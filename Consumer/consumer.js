@@ -8,11 +8,11 @@ var mensagem = [];
 
 async function consumeMessage() {
     try {
-        const connection = await amqp.connect('amqp://localhost');
+        const connection = await amqp.connect('amqp://myuser:secret@localhost');
         const channel = await connection.createChannel();
-        const queue = 'music_queue';
+        const queue = 'musica.queue';
 
-        await channel.assertQueue(queue, { durable: false });
+        await channel.assertQueue(queue, { durable: true });
         console.log(`Aguardando mensagens em ${queue}.`);
 
         channel.consume(queue, (msg) => {
@@ -37,6 +37,6 @@ app.get('/messages', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`Server listening at http://localhost:${port}/enviar`);
     consumeMessage();
 });

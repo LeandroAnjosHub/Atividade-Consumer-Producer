@@ -10,7 +10,8 @@ import school.sptech.spring_rabbittmq_exemplo.service.MusicaService;
 
 @RequestMapping("/musicas")
 @RestController
-public class MusicaController {
+public class
+    MusicaController {
 
     @Autowired
     private MusicaService musicaService;
