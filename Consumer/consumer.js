@@ -37,6 +37,6 @@ app.get('/messages', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}/enviar`);
+    console.log(`Server listening at http://localhost:${port}`);
     consumeMessage();
 });
