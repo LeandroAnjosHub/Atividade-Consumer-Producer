@@ -2,7 +2,7 @@ const express = require('express');
 const amqp = require('amqplib');
 const app = express();
 var path = require("path");
-const port = 8080;
+const port = 80;
 
 var mensagem = [];
 
